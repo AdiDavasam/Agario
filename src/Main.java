@@ -12,12 +12,16 @@ public class Main extends PApplet {
 
 
     public void setup() {
-
+        player = new Player();
+        spikeBall = new SpikeBall();
     }
 
 
     public void draw() {
-
+        background(180);
+        player.update(this);
+        player.draw(this);
+        spikeBall.draw(this);
     }
 
 
