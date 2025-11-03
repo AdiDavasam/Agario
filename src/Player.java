@@ -18,9 +18,10 @@ public class Player {
         y += speed * Math.sin(angle);
     }
 
-    public void draw(PApplet window) {
+    public void draw(PApplet window, float screenX, float screenY) {
+
         window.fill(0,0,255);
-        window.ellipse(this.x,this.y,this.radius*2,this.radius*2);
+        window.ellipse(this.x - screenX,this.y - screenY,this.radius*2,this.radius*2);
     }
 
     public float getSpeed() {
