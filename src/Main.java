@@ -22,6 +22,7 @@ public class Main extends PApplet {
         player.update(this);
         player.draw(this);
         spikeBall.draw(this);
+        if(spikeBall.collide(player)) System.out.println("Hit!");
     }
 
 

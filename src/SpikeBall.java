@@ -16,9 +16,10 @@ public class SpikeBall {
     public boolean collide(Player player) {
         double xDiff = Math.abs(this.x - player.getX());
         double yDiff = Math.abs(this.y - player.getY());
-        if (xDiff <= this.radius + player.getRadius() && yDiff <= this.radius + player.getRadius()) {
-            return true;
-        }
+        double totalDistance = Math.sqrt((xDiff * xDiff) + (yDiff*yDiff));
+        double minimumDistance = this.radius + player.getRadius();
+        if (totalDistance <= minimumDistance) return true;
+
         return false;
     }
     public void setX(float x) {
