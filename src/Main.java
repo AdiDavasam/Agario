@@ -32,8 +32,8 @@ public class Main extends PApplet {
         background(180);
 
         player.update(this, this);
-        player.draw(this, player.getX() - SCREEN_WIDTH /2, player.getY() - SCREEN_HEIGHT /2);
-//        player.draw(this);
+        //player.draw(this, player.getX() - SCREEN_WIDTH /2, player.getY() - SCREEN_HEIGHT /2);
+        player.draw(this);
         spikeBall.draw(this);
         if(spikeBall.collide(player)) System.out.println("Hit!");
 

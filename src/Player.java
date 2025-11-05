@@ -31,6 +31,15 @@ public class Player {
         window.ellipse(this.x,this.y,this.radius*2,this.radius*2);
     }
 
+    public void shootFood(PApplet window) {
+        float deltaX = window.mouseX - this.x;
+        float deltaY = window.mouseY - this.y;
+        float angle = (float) Math.atan2(deltaY,deltaX);
+        Food shotFood = new Food(this.x, this.y, 10, 0.9f);
+        Food.allfoods.add(shotFood);
+        if (this.radius <= 20) radius -= 3;
+    }
+
     public float getSpeed() {
         return speed;
     }
