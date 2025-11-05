@@ -1,41 +1,50 @@
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+
 public class Main extends PApplet {
     Player player;
     SpikeBall spikeBall;
-    double worldCoordinateX, worldCoordinateY;
-    final static int WORLD_WIDTH = 800;
-    final static int WORLD_HEIGHT = 800;
+    ArrayList<Food> allFoods;
+    double worldCoordinateX, worldCoordinateY, screenX, screenY;
+    public final static int SCREEN_WIDTH = 800;
+    public final static int SCREEN_HEIGHT = 800;
 
 
     public void settings() {
-        size(WORLD_WIDTH, WORLD_HEIGHT);
+        size(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
 
     public void setup() {
         player = new Player();
         spikeBall = new SpikeBall();
+        allFoods = new ArrayList<>();
+
         worldCoordinateX = player.getX();
         worldCoordinateY = player.getY();
+        screenX = 0;
+        screenY = 0;
     }
 
 
     public void draw() {
         background(180);
-        player.update(this);
-        player.draw(this, player.getX() - WORLD_WIDTH/2, player.getY() - WORLD_HEIGHT/2);
+
+        player.update(this, this);
+        player.draw(this, player.getX() - SCREEN_WIDTH /2, player.getY() - SCREEN_HEIGHT /2);
+//        player.draw(this);
         spikeBall.draw(this);
         if(spikeBall.collide(player)) System.out.println("Hit!");
 
-        worldCoordinateX = player.getX();
-        worldCoordinateY = player.getY();
+        screenX = player.getX() - SCREEN_WIDTH/2;
+        screenY = player.getY() - SCREEN_HEIGHT/2;
         displayWorldCoordinates();
     }
 
     public void displayWorldCoordinates() {
         fill(0);
-        text("X: "+ (int)(worldCoordinateX) + ", Y: " + (int)(worldCoordinateY), 20,20);
+        text("X: "+ (int)(screenX) + ", Y: " + (int)(screenY), 20,20);
     }
 
 
