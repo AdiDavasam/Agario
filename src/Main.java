@@ -37,6 +37,7 @@ public class Main extends PApplet {
         spikeBall.draw(this);
         if(spikeBall.collide(player)) System.out.println("Hit!");
 
+
         screenX = player.getX() - SCREEN_WIDTH/2;
         screenY = player.getY() - SCREEN_HEIGHT/2;
         displayWorldCoordinates();
@@ -45,6 +46,10 @@ public class Main extends PApplet {
     public void displayWorldCoordinates() {
         fill(0);
         text("X: "+ (int)(screenX) + ", Y: " + (int)(screenY), 20,20);
+    }
+
+    public void keyReleased() {
+        if (key == 'W') player.shootFood(this);
     }
 
 

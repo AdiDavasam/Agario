@@ -37,6 +37,7 @@ public class Player {
         float angle = (float) Math.atan2(deltaY,deltaX);
         Food shotFood = new Food(this.x, this.y, 10, 0.9f);
         Food.allfoods.add(shotFood);
+        shotFood.update(angle);
         if (this.radius <= 20) radius -= 3;
     }
 
