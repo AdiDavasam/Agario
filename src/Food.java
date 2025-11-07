@@ -7,7 +7,7 @@ public class Food {
     private int time;
     private float speed;
     private float acceleration;
-    public static ArrayList<Food> allfoods = new ArrayList<>();
+//    public static ArrayList<Food> allfoods = new ArrayList<>();
     public Food(float x, float y) {
         this.x = x;
         this.y = y;
@@ -35,16 +35,25 @@ public class Food {
         time++;
         if(time>=60){
             time=0;
-            allfoods.add(new Food((float) (Math.random()*10000),(float) (Math.random()*10000)));
+//            allfoods.add(new Food((float) (Math.random()*10000),(float) (Math.random()*10000)));
         }
         window.fill(255,0,0);
-        for (int i = 0; i < allfoods.size(); i++) {
-            window.ellipse(this.x, this.y, this.radius*2, this.radius*2);
-        }
+//        for (int i = 0; i < allfoods.size(); i++) {
+//            window.ellipse(this.x, this.y, this.radius*2, this.radius*2);
+//        }
 
     }
+    public float getX() {
+        return x;
+    }
+    public float getY() {
+        return y;
+    }
+    public float getRadius() {
+        return radius;
+    }
     public void update(float angle) {
-        if(speed<0) speed-=acceleration;
+        if(speed>0) speed-=acceleration;
         x += speed * Math.cos(angle);
         y += speed * Math.sin(angle);
     }
