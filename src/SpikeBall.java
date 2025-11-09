@@ -28,8 +28,10 @@ public class SpikeBall {
     public void setY(float y) {
         this.y = y;
     }
-    public void draw(PApplet window) {
+
+
+    public void draw(PApplet window, float screenX, float screenY) {
         window.fill(0,255, 0);
-        window.ellipse(this.x, this.y, this.radius * 2, this.radius * 2);
+        window.ellipse(this.x-screenX, this.y-screenY, this.radius * 2, this.radius * 2);
     }
 }
