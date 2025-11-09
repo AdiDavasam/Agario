@@ -8,7 +8,7 @@ public class Main extends PApplet {
     public final static int SCREEN_WIDTH = 800;
     public final static int SCREEN_HEIGHT = 800;
     public final static int WORLD_WIDTH = 10000;
-    public final static int WORLD_HEIGHT = 10000;
+    public final static int WORLD_HEIGHT = 10000; //from top left corner
 
 
 
@@ -48,7 +48,7 @@ public class Main extends PApplet {
 
     public void displayWorldCoordinates() {
         fill(0);
-        text("X: "+ (int)(screenX) + ", Y: " + (int)(screenY), 20,20);
+        text("X: "+ (int)(player.getX()) + ", Y: " + (int)(player.getY()), 20,20);
     }
 
     public void keyReleased() {

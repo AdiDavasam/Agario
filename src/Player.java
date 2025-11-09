@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import sun.applet.resources.MsgAppletViewer;
 
 import java.util.ArrayList;
 
@@ -8,8 +9,8 @@ public class Player {
     Food food;
 
     public Player() {
-        this.x = 400;
-        this.y = 400;
+        this.x = 5000;
+        this.y = 5000;
         this.speed = 5;
         this.radius = 40;
     }
@@ -20,8 +21,21 @@ public class Player {
         float deltaX = window.mouseX - (Main.SCREEN_WIDTH/2);
         float deltaY = window.mouseY - (Main.SCREEN_HEIGHT/2); //where it is from middle point of screen b/c player always in middle
         float angle = (float) Math.atan2(deltaY,deltaX);
-        x += speed * Math.cos(angle);
-        y += speed * Math.sin(angle);
+        if (Main.WORLD_WIDTH - radius > x &&  radius < x) {
+            x += speed * Math.cos(angle);
+        } else {
+            System.out.println("Ahh");
+            x = Main.WORLD_WIDTH/2;
+            y = Main.WORLD_HEIGHT/2;
+        }
+
+        if (Main.WORLD_HEIGHT - radius > y && radius < y) {
+            y += speed * Math.sin(angle);
+        } else {
+            System.out.println("Ahh");
+            x = Main.WORLD_WIDTH/2;
+            y = Main.WORLD_HEIGHT/2;
+        }
 
     }
 
@@ -31,16 +45,16 @@ public class Player {
     }
 
     public void shootFood(PApplet window, ArrayList<Food> allFoods) {
-        float deltaX = window.mouseX - Main.SCREEN_WIDTH/2;
-        float deltaY = window.mouseY - Main.SCREEN_HEIGHT/2;
+        if (this.radius >= 20) {
+            float deltaX = window.mouseX - Main.SCREEN_WIDTH/2;
+            float deltaY = window.mouseY - Main.SCREEN_HEIGHT/2;
 //        float deltaX = window.mouseY - this.y;
 //        float deltaY = window.mouseY - this.y;
-        float angle = (float) Math.atan2(deltaY,deltaX);
-        Food shotFood = new Food(this.x, this.y, 10, 0.9f,angle);
-
-        allFoods.add(shotFood);
-
-        if (this.radius >= 20) radius -= 3;
+            float angle = (float) Math.atan2(deltaY,deltaX);
+            Food shotFood = new Food(this.x, this.y, 10, 0.9f,angle);
+            allFoods.add(shotFood);
+            radius -= 3;
+        }
     }
 
     public float getSpeed() {
