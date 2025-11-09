@@ -1,14 +1,15 @@
 import processing.core.PApplet;
 
-import java.util.ArrayList;
-
 public class Main extends PApplet {
     Player player;
-    SpikeBall spikeBall;
-    ArrayList<Food> allFoods;
+    WorldObjectManager manager;
+
     float worldCoordinateX, worldCoordinateY, screenX, screenY;
     public final static int SCREEN_WIDTH = 800;
     public final static int SCREEN_HEIGHT = 800;
+    public final static int WORLD_WIDTH = 10000;
+    public final static int WORLD_HEIGHT = 10000;
+
 
 
     public void settings() {
@@ -18,13 +19,15 @@ public class Main extends PApplet {
 
     public void setup() {
         player = new Player();
-        spikeBall = new SpikeBall();
-        allFoods = new ArrayList<>();
+        manager = new WorldObjectManager();
 
         worldCoordinateX = player.getX();
         worldCoordinateY = player.getY();
         screenX = 0;
         screenY = 0;
+
+        manager.makeStartingFoods();
+        manager.makeStartingSpikeBalls();
     }
 
 
@@ -36,14 +39,9 @@ public class Main extends PApplet {
 
         setScreenCoordinates();
 
-        for (int i = 0; i < allFoods.size(); i++) {
-            //allFoods.get(i).update();
-            allFoods.get(i).draw(this,screenX,screenY);
-            allFoods.get(i).foodHitPlayer(player);
-        }
-
-        spikeBall.draw(this, screenX,screenY);
-        if(spikeBall.collide(player)) System.out.println("Hit!");
+        manager.updateAllFood();
+        manager.collisionDetection(player);
+        manager.draw(this, screenX, screenY);
 
         displayWorldCoordinates();
     }
@@ -54,7 +52,7 @@ public class Main extends PApplet {
     }
 
     public void keyReleased() {
-        if (key == 'W') player.shootFood(this,allFoods);
+        if (key == 'W') player.shootFood(this,manager.getAllFoods());
     }
 
     public void setScreenCoordinates() {

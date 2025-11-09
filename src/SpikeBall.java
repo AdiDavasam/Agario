@@ -13,7 +13,7 @@ public class SpikeBall {
         this.y = 400;
         this.radius = 50;
     }
-    public boolean collide(Player player) {
+    public boolean collidedWithPlayer(Player player) {
         double xDiff = Math.abs(this.x - player.getX());
         double yDiff = Math.abs(this.y - player.getY());
         double totalDistance = Math.sqrt((xDiff * xDiff) + (yDiff*yDiff));

@@ -7,6 +7,7 @@ public class Food {
     private int time;
     private float speed;
     private float acceleration;
+    private float angle;
 //    public static ArrayList<Food> allfoods = new ArrayList<>();
     public Food(float x, float y) {
         this.x = x;
@@ -15,23 +16,40 @@ public class Food {
         this.time = 0;
         this.speed = 0;
         this.acceleration = 0;
+        this.angle = 0;
     }
-    public Food(float x, float y, float speed, float acceleration) {
+    public Food(float x, float y, float speed, float acceleration, float angle) {
         this.x = x;
         this.y = y;
         this.radius = 20;
         this.time = 0;
         this.speed = speed;
         this.acceleration = acceleration;
+        this.angle = angle;
     }
-    public void foodHitPlayer(Player player) {
+    public boolean foodHitPlayer(Player player) {
         float xDiff = Math.abs(this.x - player.getX());
         float yDiff = Math.abs(this.y - player.getY());
         float totalDistance = (float) Math.sqrt((xDiff * xDiff) + (yDiff*yDiff));
         float minimumDistance = this.radius + player.getRadius();
-        if (totalDistance <= minimumDistance && player.getRadius() <= 60) player.setRadius(player.getRadius()+1);
+        if (totalDistance <= minimumDistance) {
+            if (player.getRadius() <= 60) {
+                player.setRadius(player.getRadius()+1);
+            }
+            return true;
+        }
+        return false;
     }
+
+    public void update() {
+        if(speed>0) speed-=acceleration;
+        if (speed<0) speed = 0;
+        x += speed * Math.cos(angle);
+        y += speed * Math.sin(angle);
+    }
+
     public void draw(PApplet window, float screenX, float screenY) {
+        window.fill(255,200,200);//i think this is pink, at least that is what google said
         window.ellipse(this.x-screenX,this.y-screenY,this.radius*2,this.radius*2);
     }
     public float getX() {
@@ -43,9 +61,5 @@ public class Food {
     public float getRadius() {
         return radius;
     }
-    public void update(float angle) {
-        if(speed>0) speed-=acceleration;
-        x += speed * Math.cos(angle);
-        y += speed * Math.sin(angle);
-    }
+
 }

@@ -36,8 +36,8 @@ public class Player {
 //        float deltaX = window.mouseY - this.y;
 //        float deltaY = window.mouseY - this.y;
         float angle = (float) Math.atan2(deltaY,deltaX);
-        Food shotFood = new Food(this.x, this.y, 10, 0.9f);
-        shotFood.update(angle);
+        Food shotFood = new Food(this.x, this.y, 10, 0.9f,angle);
+
         allFoods.add(shotFood);
 
         if (this.radius >= 20) radius -= 3;
