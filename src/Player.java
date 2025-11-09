@@ -1,5 +1,7 @@
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+
 public class Player {
     private float x,y,speed;
     private int radius;
@@ -12,7 +14,7 @@ public class Player {
         this.radius = 40;
     }
 
-    public void update(PApplet window, Main main) {
+    public void update(PApplet window) {
 //        float deltaX = window.mouseX - this.x;
 //        float deltaY = window.mouseY - this.y;
         float deltaX = window.mouseX - (Main.SCREEN_WIDTH/2);
@@ -28,15 +30,18 @@ public class Player {
         window.ellipse(Main.SCREEN_WIDTH/2,Main.SCREEN_HEIGHT/2,this.radius*2,this.radius*2); //middle :)
     }
 
-//    public void shootFood(PApplet window) {
-//        float deltaX = window.mouseX - this.x;
+    public void shootFood(PApplet window, ArrayList<Food> allFoods) {
+        float deltaX = window.mouseX - Main.SCREEN_WIDTH/2;
+        float deltaY = window.mouseY - Main.SCREEN_HEIGHT/2;
+//        float deltaX = window.mouseY - this.y;
 //        float deltaY = window.mouseY - this.y;
-//        float angle = (float) Math.atan2(deltaY,deltaX);
-//        Food shotFood = new Food(this.x, this.y, 10, 0.9f);
-////        Food.allfoods.add(shotFood);
-//        shotFood.update(angle);
-//        if (this.radius <= 20) radius -= 3;
-//    }
+        float angle = (float) Math.atan2(deltaY,deltaX);
+        Food shotFood = new Food(this.x, this.y, 10, 0.9f);
+        shotFood.update(angle);
+        allFoods.add(shotFood);
+
+        if (this.radius >= 20) radius -= 3;
+    }
 
     public float getSpeed() {
         return speed;

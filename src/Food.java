@@ -31,17 +31,8 @@ public class Food {
         float minimumDistance = this.radius + player.getRadius();
         if (totalDistance <= minimumDistance && player.getRadius() <= 60) player.setRadius(player.getRadius()+1);
     }
-    public void draw(PApplet window) {
-        time++;
-        if(time>=60){
-            time=0;
-//            allfoods.add(new Food((float) (Math.random()*10000),(float) (Math.random()*10000)));
-        }
-        window.fill(255,0,0);
-//        for (int i = 0; i < allfoods.size(); i++) {
-//            window.ellipse(this.x, this.y, this.radius*2, this.radius*2);
-//        }
-
+    public void draw(PApplet window, float screenX, float screenY) {
+        window.ellipse(this.x-screenX,this.y-screenY,this.radius*2,this.radius*2);
     }
     public float getX() {
         return x;

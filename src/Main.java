@@ -31,15 +31,20 @@ public class Main extends PApplet {
     public void draw() {
         background(180);
 
-        player.update(this, this);
-        //player.draw(this, player.getX() - SCREEN_WIDTH /2, player.getY() - SCREEN_HEIGHT /2);
+        player.update(this);
         player.draw(this);
-        spikeBall.draw(this, screenX, screenY);
+
+        setScreenCoordinates();
+
+        for (int i = 0; i < allFoods.size(); i++) {
+            //allFoods.get(i).update();
+            allFoods.get(i).draw(this,screenX,screenY);
+            allFoods.get(i).foodHitPlayer(player);
+        }
+
+        spikeBall.draw(this, screenX,screenY);
         if(spikeBall.collide(player)) System.out.println("Hit!");
 
-
-        screenX = player.getX() - SCREEN_WIDTH/2;
-        screenY = player.getY() - SCREEN_HEIGHT/2;
         displayWorldCoordinates();
     }
 
@@ -48,9 +53,15 @@ public class Main extends PApplet {
         text("X: "+ (int)(screenX) + ", Y: " + (int)(screenY), 20,20);
     }
 
-//    public void keyReleased() {
-//        if (key == 'W') player.shootFood(this);
-//    }
+    public void keyReleased() {
+        if (key == 'W') player.shootFood(this,allFoods);
+    }
+
+    public void setScreenCoordinates() {
+        screenX = player.getX() - SCREEN_WIDTH/2;
+        screenY = player.getY() - SCREEN_HEIGHT/2;
+
+    }
 
 
     public static void main(String[] args) {
