@@ -1,7 +1,10 @@
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+
 public class Main extends PApplet {
     Player player;
+    ArrayList<Player> playerObjects;
     WorldObjectManager manager;
 
     float worldCoordinateX, worldCoordinateY, screenX, screenY;
@@ -18,7 +21,9 @@ public class Main extends PApplet {
 
 
     public void setup() {
+        playerObjects = new ArrayList<>();
         player = new Player();
+        playerObjects.add(player);
         manager = new WorldObjectManager();
 
         worldCoordinateX = player.getX();
@@ -34,8 +39,13 @@ public class Main extends PApplet {
     public void draw() {
         background(180);
 
-        player.update(this);
-        player.draw(this);
+        for (int i = 0; i < playerObjects.size(); i++) {
+            Player currPlayerObj = playerObjects.get(i);
+            currPlayerObj.update(this);
+            currPlayerObj.draw(this);
+        }
+//        player.update(this);
+//        player.draw(this);
 
         setScreenCoordinates();
 
@@ -52,7 +62,9 @@ public class Main extends PApplet {
     }
 
     public void keyReleased() {
-        if (key == 'W') player.shootFood(this,manager.getAllFoods());
+        if (key == 'w') {
+            player.shootFood(this,manager.getAllFoods());
+        }
     }
 
     public void setScreenCoordinates() {

@@ -8,6 +8,7 @@ public class Food {
     private float speed;
     private float acceleration;
     private float angle;
+    int redFoodColor, greenFoodColor, blueFoodColor;
 //    public static ArrayList<Food> allfoods = new ArrayList<>();
     public Food(float x, float y) {
         this.x = x;
@@ -17,6 +18,9 @@ public class Food {
         this.speed = 0;
         this.acceleration = 0;
         this.angle = 0;
+        redFoodColor = (int)(Math.random()*170);
+        greenFoodColor = (int)(Math.random()*170);
+        blueFoodColor = (int)(Math.random()*170);
     }
     public Food(float x, float y, float speed, float acceleration, float angle) {
         this.x = x;
@@ -26,6 +30,9 @@ public class Food {
         this.speed = speed;
         this.acceleration = acceleration;
         this.angle = angle;
+        redFoodColor = (int)(Math.random()*170);
+        greenFoodColor = (int)(Math.random()*170);
+        blueFoodColor = (int)(Math.random()*170);
     }
     public boolean foodHitPlayer(Player player) {
         float xDiff = Math.abs(this.x - player.getX());
@@ -49,7 +56,7 @@ public class Food {
     }
 
     public void draw(PApplet window, float screenX, float screenY) {
-        window.fill(255,200,200);//i think this is pink, at least that is what google said
+        window.fill(redFoodColor,greenFoodColor,blueFoodColor);//i think this is pink, at least that is what google said
         window.ellipse(this.x-screenX,this.y-screenY,this.radius*2,this.radius*2);
     }
     public float getX() {
