@@ -10,7 +10,7 @@ public class SpikeBall {
         this.y = y;
         this.radius = 50;
         this.spikeball = spikeball;
-        this.spikeball.resize(200,130);
+        this.spikeball.resize(130,130);
 
     }
 //    public SpikeBall() {
@@ -37,7 +37,8 @@ public class SpikeBall {
 
     public void draw(PApplet window, float screenX, float screenY, float zoom) {
         window.fill(0,255, 0);
+        spikeball.resize((int) (130*zoom), (int) (130*zoom));
         window.ellipse((this.x-screenX) * zoom, (this.y-screenY) * zoom, this.radius * 2 * zoom, this.radius * 2 * zoom);
-        window.image(this.spikeball, (this.x-screenX-100) * zoom, (this.y-screenY-65) * zoom);
+        window.image(this.spikeball, ((this.x- (screenX + 65)) * zoom), ((this.y- (screenY + 65)) * zoom));
     }
 }

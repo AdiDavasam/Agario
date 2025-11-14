@@ -109,7 +109,7 @@ public class WorldObjectManager {
             allFoods.get(i).draw(window, screenX, screenY, zoom);
         }
         for(int i = 0; i < allSpikeBalls.size(); i++){
-            allSpikeBalls.get(i).draw(window, screenX, screenY, zoom, player);
+            allSpikeBalls.get(i).draw(window, screenX, screenY, zoom);
         }
 
         for (int i = 0; i < allEnemies.size(); i++) {

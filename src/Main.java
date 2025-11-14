@@ -25,7 +25,7 @@ public class Main extends PApplet {
         player = new Player();
         playerObjects.add(player);
         manager = new WorldObjectManager();
-        PImage img = loadImage("spikeball.png");
+        PImage img = loadImage("images/spikeball.png");
         worldCoordinateX = player.getX();
         worldCoordinateY = player.getY();
         screenX = 0;
