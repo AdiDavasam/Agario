@@ -1,4 +1,6 @@
 import processing.core.PApplet;
+import processing.core.PImage;
+
 import java.util.ArrayList;
 
 public class WorldObjectManager {
@@ -23,11 +25,11 @@ public class WorldObjectManager {
         }
     }
 
-    public void makeStartingSpikeBalls() {
+    public void makeStartingSpikeBalls(PImage spikeball) {
         for (int i = 0; i < 20; i++) {
             float x = (float) (Math.random()*Main.WORLD_WIDTH);
             float y = (float) (Math.random()*Main.WORLD_HEIGHT);
-            allSpikeBalls.add(new SpikeBall(x,y));
+            allSpikeBalls.add(new SpikeBall(x,y,spikeball));
         }
     }
 
@@ -107,7 +109,7 @@ public class WorldObjectManager {
             allFoods.get(i).draw(window, screenX, screenY, zoom);
         }
         for(int i = 0; i < allSpikeBalls.size(); i++){
-            allSpikeBalls.get(i).draw(window, screenX, screenY, zoom);
+            allSpikeBalls.get(i).draw(window, screenX, screenY, zoom, player);
         }
 
         for (int i = 0; i < allEnemies.size(); i++) {

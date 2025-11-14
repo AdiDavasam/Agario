@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import java.util.ArrayList;
 
@@ -24,14 +25,13 @@ public class Main extends PApplet {
         player = new Player();
         playerObjects.add(player);
         manager = new WorldObjectManager();
-
+        PImage img = loadImage("spikeball.png");
         worldCoordinateX = player.getX();
         worldCoordinateY = player.getY();
         screenX = 0;
         screenY = 0;
-
         manager.makeStartingFoods();
-        manager.makeStartingSpikeBalls();
+        manager.makeStartingSpikeBalls(img);
         manager.makeStartingEnemies();
 
         screenZoom = 1;

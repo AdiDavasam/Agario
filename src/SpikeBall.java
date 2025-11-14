@@ -1,18 +1,23 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class SpikeBall {
     private float x, y;
     private float radius;
-    public SpikeBall(float x, float y) {
+    private PImage spikeball;
+    public SpikeBall(float x, float y, PImage spikeball) {
         this.x = x;
         this.y = y;
         this.radius = 50;
+        this.spikeball = spikeball;
+        this.spikeball.resize(200,130);
+
     }
-    public SpikeBall() {
-        this.x = 400;
-        this.y = 400;
-        this.radius = 50;
-    }
+//    public SpikeBall() {
+//        this.x = 400;
+//        this.y = 400;
+//        this.radius = 50;
+//    }
     public boolean collidedWithPlayer(Player player) {
         double xDiff = Math.abs(this.x - player.getX());
         double yDiff = Math.abs(this.y - player.getY());
@@ -33,5 +38,6 @@ public class SpikeBall {
     public void draw(PApplet window, float screenX, float screenY, float zoom) {
         window.fill(0,255, 0);
         window.ellipse((this.x-screenX) * zoom, (this.y-screenY) * zoom, this.radius * 2 * zoom, this.radius * 2 * zoom);
+        window.image(this.spikeball, (this.x-screenX-100) * zoom, (this.y-screenY-65) * zoom);
     }
 }
