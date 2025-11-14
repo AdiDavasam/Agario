@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ public class Food {
     private float acceleration;
     private float angle;
     int redFoodColor, greenFoodColor, blueFoodColor;
+    private PImage foodface;
 //    public static ArrayList<Food> allfoods = new ArrayList<>();
     public Food(float x, float y) {
         this.x = x;
@@ -22,7 +24,7 @@ public class Food {
         greenFoodColor = (int)(Math.random()*170);
         blueFoodColor = (int)(Math.random()*170);
     }
-    public Food(float x, float y, float speed, float acceleration, float angle) {
+    public Food(float x, float y, float speed, float acceleration, float angle, PImage foodface) {
         this.x = x;
         this.y = y;
         this.radius = 20;
@@ -33,6 +35,8 @@ public class Food {
         redFoodColor = (int)(Math.random()*170);
         greenFoodColor = (int)(Math.random()*170);
         blueFoodColor = (int)(Math.random()*170);
+        this.foodface = foodface;
+        this.foodface.resize(100,100);
     }
     public boolean foodHitPlayer(Player player) {
         float xDiff = Math.abs(this.x - player.getX());
@@ -89,6 +93,7 @@ public class Food {
     public void draw(PApplet window, float screenX, float screenY, float zoom) {
         window.fill(redFoodColor,greenFoodColor,blueFoodColor);
         window.ellipse((this.x-screenX) * zoom,(this.y-screenY) * zoom,this.radius*2 * zoom,this.radius*2 * zoom);
+//        window.image(this.foodface, (this.x-screenX) * zoom - 50, (this.y-screenY) * zoom - 50);
     }
     public float getX() {
         return x;

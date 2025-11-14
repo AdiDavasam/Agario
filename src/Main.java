@@ -14,6 +14,7 @@ public class Main extends PApplet {
     public final static int WORLD_WIDTH = 10000;
     public final static int WORLD_HEIGHT = 10000; //from top left corner
     float screenZoom, startingPlayerRadius;
+    PImage img, img2, img3, img4;
 
     public void settings() {
         size(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -21,18 +22,21 @@ public class Main extends PApplet {
 
 
     public void setup() {
+        img = loadImage("images/spikeball.png");
+        img2 = loadImage("images/sarvesh.png");
+        img3 = loadImage("images/namar.png");
+        img4 = loadImage("images/tejas.png");
         playerObjects = new ArrayList<>();
-        player = new Player();
+        player = new Player(img4);
         playerObjects.add(player);
         manager = new WorldObjectManager();
-        PImage img = loadImage("images/spikeball.png");
         worldCoordinateX = player.getX();
         worldCoordinateY = player.getY();
         screenX = 0;
         screenY = 0;
         manager.makeStartingFoods();
         manager.makeStartingSpikeBalls(img);
-        manager.makeStartingEnemies();
+        manager.makeStartingEnemies(img2);
 
         screenZoom = 1;
         startingPlayerRadius = player.getRadius();
@@ -56,7 +60,7 @@ public class Main extends PApplet {
         setScreenCoordinates();
 
         manager.updateAllWorldObjects(player);
-        manager.collisionDetection(player);
+        manager.collisionDetection(player,img2);
         manager.draw(this, screenX, screenY, screenZoom, player);
 
         displayWorldCoordinates();
@@ -69,7 +73,7 @@ public class Main extends PApplet {
 
     public void keyReleased() {
         if (key == 'w') {
-            player.shootFood(this,manager.getAllFoods(), screenZoom);
+            player.shootFood(this,manager.getAllFoods(), screenZoom, img3);
         }
     }
 

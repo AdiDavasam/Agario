@@ -1,12 +1,14 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Enemy {
     private float x,y,radius,speed;
     private int movementTimer;
     private float angle;
     private boolean aggressive;
+    private PImage enemyface;
 
-    public Enemy(float x, float y, float radius, boolean aggressive) {
+    public Enemy(float x, float y, float radius, boolean aggressive, PImage enemyface) {
         this.x = x;
         this.y = y;
         this.radius = radius;
@@ -14,6 +16,8 @@ public class Enemy {
         this.movementTimer = 0;
         this.angle = 0;
         this.aggressive = aggressive;
+        this.enemyface = enemyface;
+        this.enemyface.resize(100,100);
     }
     public void setSpeed(float radius) {
         this.speed = (27/radius) * 4.5f;
@@ -56,6 +60,7 @@ public class Enemy {
         else window.fill(255,255,0);
 
         window.ellipse((this.x-screenX)*zoom, (this.y - screenY) * zoom, this.radius*2 * zoom,this.radius*2 * zoom);
+        window.image(this.enemyface, (this.x-screenX)*zoom - 50, (this.y - screenY) * zoom - 50);
     }
 
     public boolean atePlayer(Player player) {

@@ -33,13 +33,13 @@ public class WorldObjectManager {
         }
     }
 
-    public void makeStartingEnemies() {
+    public void makeStartingEnemies(PImage enemyface) {
         for (int i = 0; i < 20; i++) {
             float x = (float) (Math.random()*Main.WORLD_WIDTH);
             float y = (float) (Math.random()*Main.WORLD_HEIGHT);
             float radius = (float) (Math.random()*60+20);
             boolean aggressiveEnemy = Math.random() > 0.5f;
-            allEnemies.add(new Enemy(x,y,radius,aggressiveEnemy));
+            allEnemies.add(new Enemy(x,y,radius,aggressiveEnemy,enemyface));
         }
     }
 
@@ -63,7 +63,7 @@ public class WorldObjectManager {
         }
     }
 
-    public void collisionDetection(Player player) {
+    public void collisionDetection(Player player, PImage enemyface) {
         for (int i = allFoods.size() - 1; i >= 0; i--) { //backwards b/c we don't wanna mess up order things after removing index
             if (allFoods.get(i).foodHitPlayer(player)) {
                 allFoods.remove(i);
@@ -88,7 +88,7 @@ public class WorldObjectManager {
                     player.setX(Main.WORLD_HEIGHT/2);
                     player.setRadius(40);
                     allEnemies.clear();
-                    makeStartingEnemies();
+                    makeStartingEnemies(enemyface);
                 } else {
                     System.out.println("Ate enemy :P");
                     player.setRadius(player.getRadius() + enemy.getRadius() * 1/4);

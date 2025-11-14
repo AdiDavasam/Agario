@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import java.util.ArrayList;
 
@@ -6,12 +7,15 @@ public class Player {
     private float x,y,speed;
     private float radius;
     Food food;
+    private PImage playerface;
 
-    public Player() {
+    public Player(PImage playerface) {
         this.x = 5000;
         this.y = 5000;
         this.radius = 40;
         setSpeed(radius);
+        this.playerface = playerface;
+        this.playerface.resize(100,100);
     }
 
     public void update(PApplet window, float zoom) {
@@ -35,10 +39,11 @@ public class Player {
 
     public void draw(PApplet window, float zoom) {
         window.fill(0,0,255);
-        window.ellipse(Main.SCREEN_WIDTH/2,Main.SCREEN_HEIGHT/2,this.radius*2 * zoom,this.radius*2*zoom); //middle :)
+        window.ellipse(Main.SCREEN_WIDTH/2,Main.SCREEN_HEIGHT/2,this.radius*2 * zoom,this.radius*2*zoom);//middle :)
+        window.image(this.playerface, Main.SCREEN_WIDTH/2 - 50, Main.SCREEN_HEIGHT/2 - 50);
     }
 
-    public void shootFood(PApplet window, ArrayList<Food> allFoods, float zoom) {
+    public void shootFood(PApplet window, ArrayList<Food> allFoods, float zoom, PImage face) {
         System.out.println("Shot food");
         if (this.radius >= 20) {
             float deltaX = window.mouseX - Main.SCREEN_WIDTH/2;
@@ -49,7 +54,7 @@ public class Player {
             float foodX = (float) (this.x + (radius/2 + 40) * (Math.cos(angle))); //20 is food size
             float foodY = (float) (this.y + (radius/2 + 40) * (Math.sin(angle))); //20 is food size
 
-            Food shotFood = new Food(foodX, foodY, 25, 0.9f,angle);
+            Food shotFood = new Food(foodX, foodY, 25, 0.9f,angle, face);
             allFoods.add(shotFood);
             radius -= 3;
         }
