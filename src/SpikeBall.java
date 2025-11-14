@@ -18,7 +18,7 @@ public class SpikeBall {
         double yDiff = Math.abs(this.y - player.getY());
         double totalDistance = Math.sqrt((xDiff * xDiff) + (yDiff*yDiff));
         double minimumDistance = this.radius + player.getRadius();
-        if (totalDistance <= minimumDistance) return true;
+        if (totalDistance <= minimumDistance && player.getRadius() > this.radius + 5) return true;
 
         return false;
     }
@@ -30,8 +30,8 @@ public class SpikeBall {
     }
 
 
-    public void draw(PApplet window, float screenX, float screenY) {
+    public void draw(PApplet window, float screenX, float screenY, float zoom) {
         window.fill(0,255, 0);
-        window.ellipse(this.x-screenX, this.y-screenY, this.radius * 2, this.radius * 2);
+        window.ellipse((this.x-screenX) * zoom, (this.y-screenY) * zoom, this.radius * 2 * zoom, this.radius * 2 * zoom);
     }
 }

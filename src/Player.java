@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Player {
     private float x,y,speed;
-    private int radius;
+    private float radius;
     Food food;
 
     public Player() {
@@ -14,45 +14,37 @@ public class Player {
         setSpeed(radius);
     }
 
-    public void update(PApplet window) {
+    public void update(PApplet window, float zoom) {
         setSpeed(radius);
 
-        System.out.println(speed);
-//        float deltaX = window.mouseX - this.x;
-//        float deltaY = window.mouseY - this.y;
         float deltaX = window.mouseX - (Main.SCREEN_WIDTH/2);
         float deltaY = window.mouseY - (Main.SCREEN_HEIGHT/2); //where it is from middle point of screen b/c player always in middle
+        deltaX /= zoom;
+        deltaY /= zoom;
         float angle = (float) Math.atan2(deltaY,deltaX);
-        if (Main.WORLD_WIDTH - radius > x &&  radius < x) {
-            x += speed * Math.cos(angle);
-        } else {
-            System.out.println("Ahh");
-            x = Main.WORLD_WIDTH/2;
-            y = Main.WORLD_HEIGHT/2;
-        }
 
-        if (Main.WORLD_HEIGHT - radius > y && radius < y) {
-            y += speed * Math.sin(angle);
-        } else {
-            System.out.println("Ahh");
-            x = Main.WORLD_WIDTH/2;
-            y = Main.WORLD_HEIGHT/2;
-        }
+        x += speed * Math.cos(angle);
+        y += speed * Math.sin(angle);
+
+        if (x < radius) x = radius + 5;//5 = margin b/c wed get stuck in the wall
+        if (x > Main.WORLD_WIDTH - radius) x = Main.WORLD_WIDTH - (radius + 5);
+        if (y < radius) y = (radius+5);
+        if (y > Main.WORLD_HEIGHT - radius) y = Main.WORLD_HEIGHT - (radius+5);
 
     }
 
-    public void draw(PApplet window) {
+    public void draw(PApplet window, float zoom) {
         window.fill(0,0,255);
-        window.ellipse(Main.SCREEN_WIDTH/2,Main.SCREEN_HEIGHT/2,this.radius*2,this.radius*2); //middle :)
+        window.ellipse(Main.SCREEN_WIDTH/2,Main.SCREEN_HEIGHT/2,this.radius*2 * zoom,this.radius*2*zoom); //middle :)
     }
 
-    public void shootFood(PApplet window, ArrayList<Food> allFoods) {
+    public void shootFood(PApplet window, ArrayList<Food> allFoods, float zoom) {
         System.out.println("Shot food");
         if (this.radius >= 20) {
             float deltaX = window.mouseX - Main.SCREEN_WIDTH/2;
             float deltaY = window.mouseY - Main.SCREEN_HEIGHT/2;
-//        float deltaX = window.mouseY - this.y;
-//        float deltaY = window.mouseY - this.y;
+            deltaX /= zoom;
+            deltaY /= zoom;
             float angle = (float) Math.atan2(deltaY,deltaX);
             float foodX = (float) (this.x + (radius/2 + 40) * (Math.cos(angle))); //20 is food size
             float foodY = (float) (this.y + (radius/2 + 40) * (Math.sin(angle))); //20 is food size
@@ -67,11 +59,11 @@ public class Player {
         return speed;
     }
 
-    public int getRadius() {
+    public float getRadius() {
         return radius;
     }
 
-    public void setRadius(int radius) {
+    public void setRadius(float radius) {
         this.radius = radius;
     }
 
