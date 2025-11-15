@@ -30,7 +30,7 @@ public class Player {
         x += speed * Math.cos(angle);
         y += speed * Math.sin(angle);
 
-        if (x < radius) x = radius + 5;//5 = margin b/c wed get stuck in the wall
+        if (x < radius) x = radius + 5;//5 = margin b/c we'd get stuck in the wall
         if (x > Main.WORLD_WIDTH - radius) x = Main.WORLD_WIDTH - (radius + 5);
         if (y < radius) y = (radius+5);
         if (y > Main.WORLD_HEIGHT - radius) y = Main.WORLD_HEIGHT - (radius+5);
@@ -45,7 +45,7 @@ public class Player {
     }
 
     public void shootFood(PApplet window, ArrayList<Food> allFoods, float zoom, PImage face) {
-        System.out.println("Shot food");
+//        System.out.println("Shot food");
         if (this.radius >= 20) {
             float deltaX = window.mouseX - Main.SCREEN_WIDTH/2;
             float deltaY = window.mouseY - Main.SCREEN_HEIGHT/2;

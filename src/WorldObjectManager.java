@@ -67,7 +67,7 @@ public class WorldObjectManager {
         for (int i = allFoods.size() - 1; i >= 0; i--) { //backwards b/c we don't wanna mess up order things after removing index
             if (allFoods.get(i).foodHitPlayer(player)) {
                 allFoods.remove(i);
-                System.out.println("Ate :D");
+//                System.out.println("Ate :D");
             }
         }
 
@@ -75,7 +75,7 @@ public class WorldObjectManager {
             if (allSpikeBalls.get(i).collidedWithPlayer(player)) {
                 allSpikeBalls.remove(i);
                 player.setRadius(player.getRadius() * 0.75f);
-                System.out.println("Hit ;)");
+//                System.out.println("Hit ;)");
             }
         }
         //player vs enemy
@@ -83,7 +83,7 @@ public class WorldObjectManager {
             Enemy enemy = allEnemies.get(i);
             if (enemy.atePlayer(player)) {
                 if (enemy.biggerThanPlayer(player)) {
-                    System.out.println("gg you lost :/");
+//                    System.out.println("gg you lost :/");
 
                     player.setX(Main.WORLD_WIDTH/2);
                     player.setX(Main.WORLD_HEIGHT/2);
@@ -91,7 +91,7 @@ public class WorldObjectManager {
                     allEnemies.clear();
                     makeStartingEnemies(enemyface);
                 } else {
-                    System.out.println("Ate enemy :P");
+//                    System.out.println("Ate enemy :P");
                     player.setRadius(player.getRadius() + enemy.getRadius() * 1/4);
                     allEnemies.remove(i);
                 }
