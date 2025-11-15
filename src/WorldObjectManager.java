@@ -74,6 +74,7 @@ public class WorldObjectManager {
         for (int i = allSpikeBalls.size() - 1; i >= 0; i--) { //backwards b/c we don't wanna mess up order things after removing index
             if (allSpikeBalls.get(i).collidedWithPlayer(player)) {
                 allSpikeBalls.remove(i);
+                player.setRadius(player.getRadius() * 0.75f);
                 System.out.println("Hit ;)");
             }
         }

@@ -32,8 +32,8 @@ public class Enemy {
         float deltaX = player.getX() - this.x;
         float deltaY = player.getY() - this.y;
         float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        float angle = (float) Math.atan2(deltaY,deltaX);
         if (distance < 1000 && aggressive) {
+            float angle = (float) Math.atan2(deltaY,deltaX);
             if (this.biggerThanPlayer(player)) {
                 x += speed/2 * Math.cos(angle);
                 y += speed/2 * Math.sin(angle);
@@ -59,8 +59,9 @@ public class Enemy {
         if (biggerThanPlayer(player)) window.fill(255,100,20); //orange :D
         else window.fill(255,255,0);
 
+        enemyface.resize((int) (130*zoom), (int) (130*zoom));
         window.ellipse((this.x-screenX)*zoom, (this.y - screenY) * zoom, this.radius*2 * zoom,this.radius*2 * zoom);
-        window.image(this.enemyface, (this.x-screenX)*zoom - 50, (this.y - screenY) * zoom - 50);
+        window.image(this.enemyface, (this.x-screenX)*zoom - 60*zoom, (this.y - screenY) * zoom - 60*zoom);
     }
 
     public boolean atePlayer(Player player) {

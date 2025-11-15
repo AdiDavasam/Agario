@@ -40,7 +40,8 @@ public class Player {
     public void draw(PApplet window, float zoom) {
         window.fill(0,0,255);
         window.ellipse(Main.SCREEN_WIDTH/2,Main.SCREEN_HEIGHT/2,this.radius*2 * zoom,this.radius*2*zoom);//middle :)
-        window.image(this.playerface, Main.SCREEN_WIDTH/2 - 50, Main.SCREEN_HEIGHT/2 - 50);
+        playerface.resize((int) (100*zoom), (int) (100*zoom));
+        window.image(this.playerface, Main.SCREEN_WIDTH/2 - 50*zoom, Main.SCREEN_HEIGHT/2 - 50*zoom);
     }
 
     public void shootFood(PApplet window, ArrayList<Food> allFoods, float zoom, PImage face) {
